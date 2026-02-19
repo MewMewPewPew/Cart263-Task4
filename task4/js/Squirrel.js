@@ -1,13 +1,11 @@
 //The SVG namespace is required to create SVG elements in JavaScript. It is a string that represents the XML namespace for SVG elements          
 const svgNS = "http://www.w3.org/2000/svg";
 // Create an SVG element to represent the squirrel
-const squirrelSVG = document.createElementNS(svgNS, "svg");
+const svg = document.createElementNS(svgNS, "svg");
 
 //Randomly select a squirrel image from the array of squirrel svgs
-const squirrelImages = ["svgSquirrel1.svg", "svg/Squirrel2.svg", "svg/Squirrel3.svg", "svg/Squirrel4.svg", "svg/Squirrel5.svg"];
+const squirrelImages = ["svg/Squirrel1.svg", "svg/Squirrel2.svg", "svg/Squirrel3.svg", "svg/Squirrel4.svg", "svg/Squirrel5.svg"];
 const randomIndex = Math.floor(Math.random() * squirrelImages.length);
-const selectedSquirrelImage = squirrelImages[randomIndex];
-// this.squirrelSVG.setAttribute("href", selectedSquirrelImage);
 
 
 class Squirrel {
@@ -22,6 +20,9 @@ class Squirrel {
     //Create a renderSquirrel() method -> which essentially creates a HTML element(s) - could be an image element:) or an svg .... representing a Squirrel... (see Sun or Flower for inspiration)
     //Will be manipulating an SVG element to represent the squirrel. The position, size and color of the squirrel will be set based on the parameters passed to the constructor.
     renderSquirrel() {
+        // Calculate a new random index specifically for THIS squirrel instance
+        const randomIndex = Math.floor(Math.random() * squirrelImages.length);
+        const selectedSquirrelImage = squirrelImages[randomIndex];
         // Create an SVG element to represent the squirrel
         this.squirrelSVG = document.createElementNS(svgNS, "image");
         this.squirrelSVG.setAttribute("href", selectedSquirrelImage);
