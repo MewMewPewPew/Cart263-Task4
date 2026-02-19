@@ -8,11 +8,12 @@ const svg = document.createElementNS(svgNS, "svg");
 svg.setAttribute("width", "100%");
 svg.setAttribute("height", "100%");
 
-// Create a div element to represent the squirrel and add it to the DOM
-const squirrelDiv = document.createElement('div');
-squirrelDiv.classList.add("squirrel");
-document.querySelector(".garden").appendChild(squirrelDiv);
-squirrelDiv.appendChild(svg);
+// Create an SVG element to represent the squirrel
+const squirrelSVG = document.createElementNS(svgNS, "svg");
+squirrelSVG.setAttribute("width", this.size);
+squirrelSVG.setAttribute("height", this.size);
+// Append the squirrel SVG to the main SVG element in the DOM
+svg.appendChild(squirrelSVG);
 svg.style.position = "absolute";
 svg.style.top = "0";
 svg.style.left = "0";
@@ -27,18 +28,20 @@ class Squirrel {
     };
 
     //Create a renderSquirrel() method -> which essentially creates a HTML element(s) - could be an image element:) or an svg .... representing a Squirrel... (see Sun or Flower for inspiration)
-//Will be manipulating an SVG element to represent the squirrel. The position, size and color of the squirrel will be set based on the parameters passed to the constructor.
+    //Will be manipulating an SVG element to represent the squirrel. The position, size and color of the squirrel will be set based on the parameters passed to the constructor.
     renderSquirrel() {
-        // Set the position and size of the squirrel div based on the parameters passed to the constructor
-        this.squirrelDiv.style.left = this.position.x + "px";
-        this.squirrelDiv.style.top = this.position.y + "px";
-        this.squirrelDiv.style.width = this.size + "px";
-        this.squirrelDiv.style.height = this.size + "px";
-        // Set the background color of the squirrel div based on the color parameter passed to the constructor
-        this.squirrelDiv.style.backgroundColor = this.color;
+        //
+        // Set the position and size of the squirrel SVG
+        //  based on the parameters passed to the constructor
+        this.squirrelSVG.style.left = this.position.x + "px";
+        this.squirrelSVG.style.top = this.position.y + "px";
+        this.squirrelSVG.style.width = this.size + "px";
+        this.squirrelSVG.style.height = this.size + "px";
+        // Set the background color of the squirrel SVG based on the color parameter passed to the constructor
+        this.squirrelSVG.style.backgroundColor = this.color;
         //
     };
-    
+
     //Create an animateSquirrel() method in the Squirrel class - which will make a given Squirrel move around the garden - use the requestAnimationFrame()
     animateSquirrel() {
         // Define a function to update the position of the squirrel
