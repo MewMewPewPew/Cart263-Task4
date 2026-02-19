@@ -28,6 +28,8 @@ let garden = {
       //the sky element
       skyDiv: document.createElement("div"),
     },
+
+    numSquirrels: 5,
   };
   // new  sun instancce
   let sun =  new Sun(10,10,{r: 240, g: 206,b: 83})
@@ -68,6 +70,22 @@ let garden = {
       for (let i = 0; i < garden.numFlowers; i++) {
         // Add the flower to the array of flowers
         garden.flowers[i].renderFlower();
+      }
+
+      //create squirrels
+      for(let i = 0; i < garden.numSquirrels; i++){
+        let x = Math.random() * (window.innerWidth);
+        let y = Math.random() * 120;
+
+        //create squirrel
+        let squirrel = new squirrel(x, y, size);
+        //add squirrels to array
+        garden.squirrels.push(squirrel);
+      }
+
+      for(let i = 0; i < garden.numSquirrels; i++){
+        //add squirrels to array
+        garden.squirrels[i].renderSquirrel();
       }
   }
   createAndRenderTheGarden();
