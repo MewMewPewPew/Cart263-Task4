@@ -78,6 +78,10 @@ window.onload = function () {
       //initial location
       let x = Math.random() * (window.innerWidth);
       let y = Math.random() * 120;
+      let position = {
+        x: Math.random() * (window.innerWidth),
+        y: Math.random() * 120
+      };
       //squirrel size
       let size = Math.random() * 30 + 10;
       //random colors
