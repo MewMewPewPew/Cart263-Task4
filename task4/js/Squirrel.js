@@ -21,17 +21,33 @@ class Squirrel {
         this.color = color;
     }
 
-    //Create a renderSquirrel() method -> which essentially creates a HTML element(s) - could be
-    // an image element:) or an svg .... representing a Squirrel... (see Sun or Flower for inspiration)
+    //Create a renderSquirrel() method -> which essentially creates a HTML element(s) - could be an image element:) or an svg .... representing a Squirrel... (see Sun or Flower for inspiration)
 
     renderSquirrel() {
+        // Create a div element to represent the squirrel and add it to the DOM
         this.squirrelDiv = document.createElement('div');
+        // add a class to the div for styling purposes and append it to the garden element in the DOM
         this.squirrelDiv.classList.add("squirrel");
         document.querySelector(".garden").appendChild(this.squirrelDiv);
+        // Set the position and size of the squirrel div based on the parameters passed to the constructor
+        this.squirrelDiv.style.left = this.position.x + "px";
+        this.squirrelDiv.style.top = this.position.y + "px";
+        this.squirrelDiv.style.width = this.size + "px";
+        this.squirrelDiv.style.height = this.size + "px";
+        // Set the background color of the squirrel div based on the color parameter passed to the constructor
+        this.squirrelDiv.style.backgroundColor = this.color;
+        //
     }
-
+    //Create an animateSquirrel() method in the Squirrel class - which will make a given Squirrel move around the garden - use the requestAnimationFrame()
     animateSquirrel() {
-
+        // Define a function to update the position of the squirrel
+        const updatePosition = () => {
+            // Update the position of the squirrel by changing its left and top style properties
+            this.squirrelDiv.style.left = this.position.x + "px";
+            this.squirrelDiv.style.top = this.position.y + "px";
+            // Request the next animation frame to continue the animation
+            requestAnimationFrame(updatePosition);
+        };
     }
 
     //Implement a counter to keep track of how many nuts any given squirrel has picked up (SEE TEAM D for collab)
