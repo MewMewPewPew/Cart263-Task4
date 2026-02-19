@@ -32,6 +32,7 @@ window.onload = function () {
     squirrels: [],
     numSquirrels: 5,
   };
+
   // new  sun instancce
   let sun = new Sun(10, 10, { r: 240, g: 206, b: 83 })
 
@@ -73,6 +74,19 @@ window.onload = function () {
       garden.flowers[i].renderFlower();
     }
 
+    // create squirrel SVG container
+    garden.squirrelSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+
+    garden.squirrelSVG.setAttribute("width", window.innerWidth);
+    garden.squirrelSVG.setAttribute("height", 300);
+
+    garden.squirrelSVG.style.position = "absolute";
+    garden.squirrelSVG.style.top = "0px";
+    garden.squirrelSVG.style.left = "0px";
+
+    // Append the squirrel SVG container to the grass div
+    garden.grass.grassDiv.appendChild(garden.squirrelSVG);
+
     //create squirrels
     for (let i = 0; i < garden.numSquirrels; i++) {
       //initial location
@@ -97,7 +111,9 @@ window.onload = function () {
 
     for (let i = 0; i < garden.numSquirrels; i++) {
       //add squirrels to array
-      garden.squirrels[i].renderSquirrel();
+      garden.squirrels[i].renderSquirrel(garden.squirrelSVG);
+      //animate squirrels only over the grass (not the sky) so we pass in the grass div as the container for the animation
+      garden.squirrels[i].animateSquirrel(garden.grass.grassDiv);
     }
   }
   createAndRenderTheGarden();

@@ -2,11 +2,18 @@
 const svgNS = "http://www.w3.org/2000/svg";
 // Create an SVG element to represent the squirrel
 const svg = document.createElementNS(svgNS, "svg");
+// IMPORTANT: give it a size
+svg.setAttribute("width", "800");
+svg.setAttribute("height", "600");
 
 //Randomly select a squirrel image from the array of squirrel svgs
 const squirrelImages = ["svg/Squirrel1.svg", "svg/Squirrel2.svg", "svg/Squirrel3.svg", "svg/Squirrel4.svg", "svg/Squirrel5.svg"];
 const randomIndex = Math.floor(Math.random() * squirrelImages.length);
 
+//TO DO: 
+// - give squirrels a velocity, currently they are static and just appear in the garden, but we want them to move around the garden. 
+// - currently the squirrels aren't changing their color at all. we could assign them colors from an array of fur colors since random is less life-like?
+// -  Maybe we should constrain the size of the squirrels to be closer in size to the flowers, since some of time the squirrels appear very tiny?
 
 class Squirrel {
     //constructor which takes a position, size and color as parameters
@@ -20,9 +27,9 @@ class Squirrel {
 
     };
 
-    //Create a renderSquirrel() method -> which essentially creates a HTML element(s) - could be an image element:) or an svg .... representing a Squirrel... (see Sun or Flower for inspiration)
+    //Create a renderSquirrel() method
     //Will be manipulating an SVG element to represent the squirrel. The position, size and color of the squirrel will be set based on the parameters passed to the constructor.
-    renderSquirrel() {
+    renderSquirrel(svgContainer) {
         // Calculate a new random index specifically for THIS squirrel instance
         const randomIndex = Math.floor(Math.random() * squirrelImages.length);
         const selectedSquirrelImage = squirrelImages[randomIndex];
@@ -33,13 +40,12 @@ class Squirrel {
         this.squirrelSVG.setAttribute("y", this.position.y);
         this.squirrelSVG.setAttribute("width", this.size);
         this.squirrelSVG.setAttribute("height", this.size);
-        svg.appendChild(this.squirrelSVG);
+        svgContainer.appendChild(this.squirrelSVG);
     };
 
     //Create an animateSquirrel() method in the Squirrel class - which will make a given Squirrel move around the garden - use the requestAnimationFrame()
     animateSquirrel() {
-        // Define a function to update the position of the squirrel
-
+        // Define a function to update the position of the squirrel based on its velocity
         const updatePosition = () => {
             // --- ADDED LOGIC: Change the position ---
             this.position.x += this.velocity.x;
@@ -48,10 +54,24 @@ class Squirrel {
             this.squirrelSVG.setAttribute("x", this.position.x);
             this.squirrelSVG.setAttribute("y", this.position.y);
             // Request the next animation frame to continue the animation
-            requestAnimationFrame(updatePosition);
+            
+            this.animationId = requestAnimationFrame(updatePosition);
         };
+        
+        // method to stop animating the squirrel
+        //TO DO: 
+        //  - maybe squirrels could stop moving after it picking up a nut? then after a few seconds it could start moving again?
+        this.stopAnimation = function () {
+            cancelAnimationFrame(this.animationId);
+        }
+        // Start the animation by calling the updatePosition function
         updatePosition();
+        // this.stopAnimation(); // Call the stopAnimation method to stop the animation after one frame (for testing purposes)
+
     };
+
+//TO DO!!!!!!!: 
+// - connect the squirrels to the nuts in the garden, so that when a squirrel interacts with a nut element in the garden, it increments the nut count for that squirrel and logs it to the console.
 
     //Implement a counter to keep track of how many nuts any given squirrel has picked up (SEE TEAM D for collab)
     // Method that increments the nut count and logs it to the console
