@@ -7,7 +7,12 @@ const garden = document.querySelector(".garden");
 const svg = document.createElementNS(svgNS, "svg");
 svg.setAttribute("width", "100%");
 svg.setAttribute("height", "100%");
-garden.appendChild(svg);
+
+// Create a div element to represent the squirrel and add it to the DOM
+const squirrelDiv = document.createElement('div');
+squirrelDiv.classList.add("squirrel");
+document.querySelector(".garden").appendChild(squirrelDiv);
+squirrelDiv.appendChild(svg);
 svg.style.position = "absolute";
 svg.style.top = "0";
 svg.style.left = "0";
@@ -24,11 +29,6 @@ class Squirrel {
     //Create a renderSquirrel() method -> which essentially creates a HTML element(s) - could be an image element:) or an svg .... representing a Squirrel... (see Sun or Flower for inspiration)
 //Will be manipulating an SVG element to represent the squirrel. The position, size and color of the squirrel will be set based on the parameters passed to the constructor.
     renderSquirrel() {
-        // Create a div element to represent the squirrel and add it to the DOM
-        this.squirrelDiv = document.createElement('div');
-        // add a class to the div for styling purposes and append it to the garden element in the DOM
-        this.squirrelDiv.classList.add("squirrel");
-        document.querySelector(".garden").appendChild(this.squirrelDiv);
         // Set the position and size of the squirrel div based on the parameters passed to the constructor
         this.squirrelDiv.style.left = this.position.x + "px";
         this.squirrelDiv.style.top = this.position.y + "px";
