@@ -51,8 +51,8 @@ class Squirrel {
         // Define a function to update the position of the squirrel
         const updatePosition = () => {
             // Update the position of the squirrel by changing its left and top style properties
-            this.squirrelDiv.style.left = this.position.x + "px";
-            this.squirrelDiv.style.top = this.position.y + "px";
+            this.squirrelSVG.style.left = this.position.x + "px";
+            this.squirrelSVG.style.top = this.position.y + "px";
             // Request the next animation frame to continue the animation
             requestAnimationFrame(updatePosition);
         };
