@@ -30,7 +30,11 @@ class Squirrel {
     //Create a renderSquirrel() method -> which essentially creates a HTML element(s) - could be an image element:) or an svg .... representing a Squirrel... (see Sun or Flower for inspiration)
     //Will be manipulating an SVG element to represent the squirrel. The position, size and color of the squirrel will be set based on the parameters passed to the constructor.
     renderSquirrel() {
-        //
+        //Randomly select a squirrel image from the array of squirrel svgs
+        const squirrelImages = ["squirrel1.svg", "squirrel2.svg", "squirrel3.svg"];
+        const randomIndex = Math.floor(Math.random() * squirrelImages.length);
+        const selectedSquirrelImage = squirrelImages[randomIndex];
+        this.squirrelSVG.setAttribute("href", selectedSquirrelImage);
         // Set the position and size of the squirrel SVG
         //  based on the parameters passed to the constructor
         this.squirrelSVG.style.left = this.position.x + "px";
