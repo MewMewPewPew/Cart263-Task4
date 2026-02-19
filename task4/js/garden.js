@@ -78,14 +78,14 @@ let garden = {
         let y = Math.random() * 120;
 
         //create squirrel
-        let squirrel = new squirrel(x, y, size);
+        let squirrel = new squirrel(position, size, color);
         //add squirrels to array
-        garden.squirrels.push(squirrel);
+        garden.squirrel.push(squirrel);
       }
 
       for(let i = 0; i < garden.numSquirrels; i++){
         //add squirrels to array
-        garden.squirrels[i].renderSquirrel();
+        garden.squirrel[i].renderSquirrel();
       }
   }
   createAndRenderTheGarden();
