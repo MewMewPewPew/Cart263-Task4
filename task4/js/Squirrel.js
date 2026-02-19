@@ -1,8 +1,6 @@
 //The SVG namespace is required to create SVG elements in JavaScript. It is a string that represents the XML namespace for SVG elements          
 const svgNS = "http://www.w3.org/2000/svg";
 const svg = document.createElementNS(svgNS, "svg");
-svg.setAttribute("width", "100%");
-svg.setAttribute("height", "100%");
 
 // Create an SVG element to represent the squirrel
 const squirrelSVG = document.createElementNS(svgNS, "svg");
