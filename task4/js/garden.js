@@ -76,8 +76,6 @@ window.onload = function () {
     //create squirrels
     for (let i = 0; i < garden.numSquirrels; i++) {
       //initial location
-      let x = Math.random() * (window.innerWidth);
-      let y = Math.random() * 120;
       let position = {
         x: Math.random() * (window.innerWidth),
         y: Math.random() * 120
