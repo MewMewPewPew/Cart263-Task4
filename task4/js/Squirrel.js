@@ -1,9 +1,5 @@
 //The SVG namespace is required to create SVG elements in JavaScript. It is a string that represents the XML namespace for SVG elements          
 const svgNS = "http://www.w3.org/2000/svg";
-
-// selected element is stored in the variable "garden" for later use when appending the squirrel elements to it.
-const garden = document.querySelector(".garden");
-
 const svg = document.createElementNS(svgNS, "svg");
 svg.setAttribute("width", "100%");
 svg.setAttribute("height", "100%");
@@ -37,14 +33,13 @@ class Squirrel {
     //Will be manipulating an SVG element to represent the squirrel. The position, size and color of the squirrel will be set based on the parameters passed to the constructor.
     renderSquirrel() {
        
-        // Set the position and size of the squirrel SVG
-        //  based on the parameters passed to the constructor
+        // Set the position and size of the squirrel SVG based on the parameters passed to the constructor
         this.squirrelSVG.style.left = this.position.x + "px";
         this.squirrelSVG.style.top = this.position.y + "px";
         this.squirrelSVG.style.width = this.size + "px";
         this.squirrelSVG.style.height = this.size + "px";
-        // Set the background color of the squirrel SVG based on the color parameter passed to the constructor
-        this.squirrelSVG.style.backgroundColor = this.color;
+        // Set the color of the squirrel SVG based on the color parameter passed to the constructor
+        this.squirrelSVG.style.fill = this.color;
         //
     };
 
