@@ -60,7 +60,8 @@ class Squirrel {
     };
 
     //Implement a counter to keep track of how many nuts any given squirrel has picked up (SEE TEAM D for collab)
-    // Create a method called nutCounter() that increments the nut count and logs it to the console
+    // Method that increments the nut count and logs it to the console
+    // needs to be called whenever a squirrel picks up a nut (this can be implemented in the animateSquirrel() method or in a separate method that is called when a squirrel interacts with a nut element in the garden)
     nutCounter() {
         this.nutCount = this.nutCount + 1;
         console.log(this.nutCount);
