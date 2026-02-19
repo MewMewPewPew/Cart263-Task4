@@ -15,6 +15,9 @@ class Squirrel {
         this.size = size;
         this.color = color;
         this.nutCount = 0; // Initialize nut count to 0
+        this.velocity = { x: 0, y: 0 }; // Initialize velocity
+        this.speed = 1; // Set a speed for the squirrel's movement
+
     };
 
     //Create a renderSquirrel() method -> which essentially creates a HTML element(s) - could be an image element:) or an svg .... representing a Squirrel... (see Sun or Flower for inspiration)
@@ -36,7 +39,11 @@ class Squirrel {
     //Create an animateSquirrel() method in the Squirrel class - which will make a given Squirrel move around the garden - use the requestAnimationFrame()
     animateSquirrel() {
         // Define a function to update the position of the squirrel
+
         const updatePosition = () => {
+            // --- ADDED LOGIC: Change the position ---
+            this.position.x += this.velocity.x;
+            this.position.y += this.velocity.y;
             // Update the position of the squirrel by changing its x and y attributes
             this.squirrelSVG.setAttribute("x", this.position.x);
             this.squirrelSVG.setAttribute("y", this.position.y);
