@@ -4,19 +4,16 @@ const svg = document.createElementNS(svgNS, "svg");
 
 // Create an SVG element to represent the squirrel
 const squirrelSVG = document.createElementNS(svgNS, "svg");
-squirrelSVG.setAttribute("width", this.size);
-squirrelSVG.setAttribute("height", this.size);
+
 // Append the squirrel SVG to the main SVG element in the DOM
 svg.appendChild(squirrelSVG);
-svg.style.position = "absolute";
-svg.style.top = "0";
-svg.style.left = "0";
+
 
 //Randomly select a squirrel image from the array of squirrel svgs
 const squirrelImages = ["svg/Squirrel1.svg", "svg/Squirrel2.svg", "svg/Squirrel3.svg", "svg/Squirrel4.svg", "svg/Squirrel5.svg"];
 const randomIndex = Math.floor(Math.random() * squirrelImages.length);
 const selectedSquirrelImage = squirrelImages[randomIndex];
-this.squirrelSVG.setAttribute("href", selectedSquirrelImage);
+// this.squirrelSVG.setAttribute("href", selectedSquirrelImage);
 
 
 class Squirrel {
