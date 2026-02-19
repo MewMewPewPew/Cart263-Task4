@@ -29,6 +29,7 @@ let garden = {
       skyDiv: document.createElement("div"),
     },
 
+    squirrels: [],
     numSquirrels: 5,
   };
   // new  sun instancce
@@ -80,12 +81,12 @@ let garden = {
         //create squirrel
         let squirrel = new squirrel(position, size, color);
         //add squirrels to array
-        garden.squirrel.push(squirrel);
+        garden.squirrels.push(squirrel);
       }
 
       for(let i = 0; i < garden.numSquirrels; i++){
         //add squirrels to array
-        garden.squirrel[i].renderSquirrel();
+        garden.squirrels[i].renderSquirrel();
       }
   }
   createAndRenderTheGarden();
