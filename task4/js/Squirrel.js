@@ -50,7 +50,12 @@ class Squirrel {
             // --- ADDED LOGIC: Change the position ---
             this.position.x += this.velocity.x;
             this.position.y += this.velocity.y;
-            
+
+            // check for any nut pickups
+            if (typeof window.checkNutCollisions === 'function') {
+                window.checkNutCollisions(this);
+            }
+
             // Boundary checking for squirrels to bounce off walls of the 
             const maxX = window.innerWidth - this.size;
             const maxY = 300 - this.size; // SVG container height is 300px

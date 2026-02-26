@@ -3,8 +3,12 @@ window.onload = function () {
   let garden = {
     // An array to store the individual flowers
     flowers: [],
+    // An array to store the individual nuts
+    nuts: [],
     // How many flowers in the garden
     numFlowers: 40,
+    // How many nuts in the garden
+    numNuts: 10,
     /*grass object */
     grass: {
       // The color of the grass (background)
@@ -74,6 +78,18 @@ window.onload = function () {
       garden.flowers[i].renderFlower();
     }
 
+    //create some nuts
+    for (let i = 0; i < garden.numNuts; i++) {
+      let x = Math.random() * window.innerWidth;
+      let y = Math.random() * 80;
+      let size = Math.random() * 25 + 15;
+      let nut = new Nut(x, y, size);
+      garden.nuts.push(nut);
+    }
+    for (let i = 0; i < garden.nuts.length; i++) {
+      garden.nuts[i].renderNut();
+    }
+
     // create squirrel SVG container
     garden.squirrelSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 
@@ -112,10 +128,38 @@ window.onload = function () {
     for (let i = 0; i < garden.numSquirrels; i++) {
       //add squirrels to array
       garden.squirrels[i].renderSquirrel(garden.squirrelSVG);
-      //animate squirrels only over the grass (not the sky) so we pass in the grass div as the container for the animation
-      garden.squirrels[i].animateSquirrel(garden.grass.grassDiv);
+      //animate squirrels, collision helper will read garden.nuts
+      garden.squirrels[i].animateSquirrel();
     }
   }
+
+  // helper invoked by Nut.pickup() to regenerate a nut
+  window.spawnNewNut = function() {
+    let nx = Math.random() * window.innerWidth;
+    let ny = Math.random() * 120;
+    let nsize = 20;
+    let nut = new Nut(nx, ny, nsize);
+    nut.renderNut();
+    garden.nuts.push(nut);
+  }
+
+  // collision helper referenced by squirrels
+  window.checkNutCollisions = function(squirrel) {
+    const pickupRadius = squirrel.size;
+    for (let nut of garden.nuts) {
+      if (!nut.active) continue;
+      const dx = squirrel.position.x - nut.x;
+      const dy = squirrel.position.y - nut.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < pickupRadius + nut.size / 2) {
+        nut.pickup();
+        squirrel.nutCounter();
+        return true;
+      }
+    }
+    return false;
+  };
+
   createAndRenderTheGarden();
 }
 
