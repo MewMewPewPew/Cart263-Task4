@@ -6,12 +6,11 @@ const svg = document.createElementNS(svgNS, "svg");
 svg.setAttribute("width", "800");
 svg.setAttribute("height", "600");
 
-//Randomly select a squirrel image from the array of squirrel svgs
+//Randomly select a squirrel image from the array of 5 squirrel svgs
 const squirrelImages = ["svg/Squirrel1.svg", "svg/Squirrel2.svg", "svg/Squirrel3.svg", "svg/Squirrel4.svg", "svg/Squirrel5.svg"];
 const randomIndex = Math.floor(Math.random() * squirrelImages.length);
 
-//TO DO: 
-// - give squirrels a velocity, currently they are static and just appear in the garden, but we want them to move around the garden. 
+//TO DO:  
 // - currently the squirrels aren't changing their color at all. we could assign them colors from an array of fur colors since random is less life-like?
 // -  Maybe we should constrain the size of the squirrels to be closer in size to the flowers, since some of time the squirrels appear very tiny?
 
@@ -22,13 +21,14 @@ class Squirrel {
         this.size = size;
         this.color = color;
         this.nutCount = 0; // Initialize nut count to 0
-        this.velocity = { x: 0, y: 0 }; // Initialize velocity
         this.speed = 1; // Set a speed for the squirrel's movement
+        this.velocity = { x: (Math.random() * 2 - 1) * this.speed, y: (Math.random() * 2 - 1) * this.speed }; // Initialize velocity with random direction and speed
 
     };
 
     //Create a renderSquirrel() method
     //Will be manipulating an SVG element to represent the squirrel. The position, size and color of the squirrel will be set based on the parameters passed to the constructor.
+    //need to pass svgContainer as a parameter to append the squirrel SVG element to the he garden SVG element since it is defined in the garden.js file and not in the squirrel.js file where the Squirrel class is defined. This way, we can ensure that the squirrel is rendered within the correct context of the garden and can interact with other elements in the garden such as the nuts.
     renderSquirrel(svgContainer) {
         // Calculate a new random index specifically for THIS squirrel instance
         const randomIndex = Math.floor(Math.random() * squirrelImages.length);
@@ -50,14 +50,31 @@ class Squirrel {
             // --- ADDED LOGIC: Change the position ---
             this.position.x += this.velocity.x;
             this.position.y += this.velocity.y;
+            
+            // Boundary checking for squirrels to bounce off walls of the 
+            const maxX = window.innerWidth - this.size;
+            const maxY = 300 - this.size; // SVG container height is 300px
+            
+            // Check horizontal boundaries
+            if (this.position.x <= 0 || this.position.x >= maxX) {
+                this.velocity.x *= -1; // Reverse horizontal velocity
+                this.position.x = Math.max(0, Math.min(this.position.x, maxX)); // Clamp position
+            }
+            
+            // Check vertical boundaries
+            if (this.position.y <= 0 || this.position.y >= maxY) {
+                this.velocity.y *= -1; // Reverse vertical velocity
+                this.position.y = Math.max(0, Math.min(this.position.y, maxY)); // Clamp position
+            }
+            
             // Update the position of the squirrel by changing its x and y attributes
             this.squirrelSVG.setAttribute("x", this.position.x);
             this.squirrelSVG.setAttribute("y", this.position.y);
             // Request the next animation frame to continue the animation
-            
+
             this.animationId = requestAnimationFrame(updatePosition);
         };
-        
+
         // method to stop animating the squirrel
         //TO DO: 
         //  - maybe squirrels could stop moving after it picking up a nut? then after a few seconds it could start moving again?
@@ -66,12 +83,11 @@ class Squirrel {
         }
         // Start the animation by calling the updatePosition function
         updatePosition();
-        // this.stopAnimation(); // Call the stopAnimation method to stop the animation after one frame (for testing purposes)
 
     };
 
-//TO DO!!!!!!!: 
-// - connect the squirrels to the nuts in the garden, so that when a squirrel interacts with a nut element in the garden, it increments the nut count for that squirrel and logs it to the console.
+    //TO DO!!!!!!!: 
+    // - connect the squirrels to the nuts in the garden, so that when a squirrel interacts with a nut element in the garden, it increments the nut count for that squirrel and logs it to the console.
 
     //Implement a counter to keep track of how many nuts any given squirrel has picked up (SEE TEAM D for collab)
     // Method that increments the nut count and logs it to the console
